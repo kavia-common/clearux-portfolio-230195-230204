@@ -1,48 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { siteData } from "./content/siteData";
+import { AppShell } from "./components/layout/AppShell";
+import { HomeSection } from "./components/sections/HomeSection";
+import { AboutSection } from "./components/sections/AboutSection";
+import { ExperienceSection } from "./components/sections/ExperienceSection";
+import { WorkSection } from "./components/sections/WorkSection";
+import { VisualExperimentationsSection } from "./components/sections/VisualExperimentationsSection";
+import { ServicesSection } from "./components/sections/ServicesSection";
+import { FooterSection } from "./components/sections/FooterSection";
 
 // PUBLIC_INTERFACE
 function App() {
-  const [theme, setTheme] = useState('light');
-
-  // Effect to apply theme to document element
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
-
+  /** Single-page, typography-first portfolio application. */
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppShell navItems={siteData.nav}>
+      <main id="main" className="site-main" role="main">
+        <HomeSection data={siteData.home} />
+        <AboutSection data={siteData.about} />
+        <ExperienceSection data={siteData.experience} />
+        <WorkSection data={siteData.work} />
+        <VisualExperimentationsSection data={siteData.visualExperimentations} />
+        <ServicesSection data={siteData.services} />
+      </main>
+      <FooterSection data={siteData.footer} />
+    </AppShell>
   );
 }
 

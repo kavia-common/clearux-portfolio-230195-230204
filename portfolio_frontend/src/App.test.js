@@ -1,8 +1,10 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+test("renders primary navigation", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const nav = screen.getByRole("navigation", { name: /primary/i });
+  expect(nav).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: /home/i })).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: /work/i })).toBeInTheDocument();
 });
